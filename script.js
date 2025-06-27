@@ -1,247 +1,124 @@
-/* Reset e base */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #e0f0ff 0%, #f7fbff 100%);
-  margin: 0;
-  padding: 20px;
-  color: #34495e;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+function formatarValorMonetario(valor) {
+  if (valor === null || valor === undefined || valor === "") return "";
 
-h1 {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 35px;
-  font-weight: 700;
-  font-size: 2.2rem;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  background: #ffffff;
-  padding: 40px 35px;
-  border-radius: 15px;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-}
-
-.container:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-label {
-  display: block;
-  margin-top: 22px;
-  font-weight: 600;
-  color: #34495e;
-  font-size: 1.1rem;
-  letter-spacing: 0.02em;
-}
-
-input, select, button {
-  width: 100%;
-  padding: 16px 22px;
-  margin-top: 10px;
-  border-radius: 8px;
-  border: 1.5px solid #b0c4de;
-  box-sizing: border-box;
-  font-size: 1rem;
-  color: #2c3e50;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  background: #fafafa;
-}
-
-input:focus, select:focus {
-  outline: none;
-  border-color: #2980b9;
-  box-shadow: 0 0 8px rgba(41, 128, 185, 0.4);
-  background: #fff;
-}
-
-button {
-  margin-top: 28px;
-  background-color: #2980b9;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  padding: 16px 22px;
-  font-size: 1.1rem;
-  box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
-  border-radius: 8px;
-}
-
-button:hover {
-  background-color: #1c5980;
-  box-shadow: 0 8px 18px rgba(28, 89, 128, 0.6);
-  transform: translateY(-2px);
-}
-
-button.limpar {
-  background-color: #e74c3c;
-  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
-}
-
-button.limpar:hover {
-  background-color: #b83228;
-  box-shadow: 0 8px 18px rgba(184, 50, 40, 0.6);
-}
-
-#resultado {
-  margin-top: 35px;
-  background: #f9fbff;
-  padding: 25px 30px;
-  border-radius: 12px;
-  border-left: 6px solid #2980b9;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: #2c3e50;
-  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.04);
-  min-height: 260px;
-  overflow-x: auto;
-  font-family: 'Courier New', Courier, monospace;
-}
-
-/* Estilo da tabela dentro do resultado */
-
-#resultado table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-}
-
-#resultado thead {
-  background-color: #2980b9;
-  color: white;
-}
-
-#resultado thead th {
-  padding: 16px 20px;
-  font-weight: 700;
-  text-align: center;
-  border-right: 1px solid rgba(255,255,255,0.3);
-  font-size: 1rem;
-}
-
-#resultado thead th:last-child {
-  border-right: none;
-}
-
-#resultado tbody tr {
-  background-color: #fff;
-  transition: background-color 0.3s ease;
-  cursor: default;
-}
-
-#resultado tbody tr:nth-child(even) {
-  background-color: #ecf4ff;
-}
-
-#resultado tbody tr:hover {
-  background-color: #d6e7ff;
-}
-
-#resultado tbody td {
-  padding: 14px 20px;
-  text-align: center;
-  border-bottom: 1px solid #e1e8f5;
-  font-size: 0.95rem;
-  color: #34495e;
-}
-
-#resultado tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* Responsividade para telas pequenas */
-@media (max-width: 600px) {
-  body {
-    padding: 15px 10px;
+  if (typeof valor === "number") {
+    valor = valor.toFixed(2);
+  } else {
+    valor = parseFloat(valor.replace(/\./g, "").replace(",", "."));
+    if (isNaN(valor)) return "";
+    valor = valor.toFixed(2);
   }
 
-  .container {
-    max-width: 100%;
-    padding: 25px 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    border-radius: 12px;
+  const partes = valor.split(".");
+  partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  return partes.join(",");
+}
+
+function formatarInput(input) {
+  let valor = input.value.replace(/\D/g, "");
+  if (valor === "") {
+    input.value = "";
+    return;
   }
 
-  label {
-    font-size: 1rem;
-    margin-top: 18px;
+  valor = (parseFloat(valor) / 100).toFixed(2);
+  const partes = valor.split(".");
+  partes[0] = partes[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  input.value = partes.join(",");
+}
+
+function limparCampos() {
+  document.getElementById("valor").value = "";
+  document.getElementById("entrada").value = "";
+  document.getElementById("juros").value = "";
+  document.getElementById("prazo").value = "";
+  document.getElementById("resultado").innerHTML = "";
+}
+
+function calcular() {
+  const parseBR = (valor) => parseFloat(valor.replace(/\./g, "").replace(",", "."));
+
+  const valor = parseBR(document.getElementById("valor").value);
+  const entrada = parseBR(document.getElementById("entrada").value);
+  const taxaAnual = parseFloat(document.getElementById("juros").value);
+  const prazo = parseInt(document.getElementById("prazo").value);
+  const resultadoDiv = document.getElementById("resultado");
+
+  if (isNaN(valor) || isNaN(entrada) || isNaN(taxaAnual) || isNaN(prazo)) {
+    resultadoDiv.innerHTML = "<p>Preencha todos os campos corretamente.</p>";
+    return;
   }
 
-  input, select, button {
-    font-size: 1rem;
-    padding: 14px 18px;
+  if (valor <= 0 || entrada < 0) {
+    resultadoDiv.innerHTML = "<p>Os valores devem ser maiores que zero.</p>";
+    return;
   }
 
-  button {
-    margin-top: 20px;
-    padding: 14px 18px;
+  if (entrada > valor) {
+    resultadoDiv.innerHTML = "<p>O valor da entrada não pode ser maior que o valor do imóvel.</p>";
+    return;
   }
 
-  #resultado {
-    min-height: 220px;
-    padding: 20px 18px;
-    font-size: 0.95rem;
+  const percentualEntrada = entrada / valor;
+  if (percentualEntrada < 0.2) {
+    alert("Atenção: a entrada está abaixo de 20% do valor do imóvel. Isso pode impactar as condições do financiamento.");
   }
 
-  /* Tabela responsiva em formato card */
-  #resultado table,
-  #resultado thead,
-  #resultado tbody,
-  #resultado th,
-  #resultado td,
-  #resultado tr {
-    display: block;
+  const valorFinanciado = valor - entrada;
+  const taxaMensal = taxaAnual / 12 / 100;
+
+  // PRICE
+  const parcelaPrice = valorFinanciado * (taxaMensal * Math.pow(1 + taxaMensal, prazo)) /
+                       (Math.pow(1 + taxaMensal, prazo) - 1);
+  const totalPrice = parcelaPrice * prazo;
+
+  // SAC
+  const amortizacao = valorFinanciado / prazo;
+  let saldoDevedor = valorFinanciado;
+  let totalSac = 0;
+  let detalhesSac = `
+    <table>
+      <thead>
+        <tr>
+          <th>Parcela</th>
+          <th>Prestação</th>
+          <th>Juros</th>
+          <th>Amortização</th>
+          <th>Saldo Devedor</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  for (let i = 1; i <= prazo; i++) {
+    const juros = saldoDevedor * taxaMensal;
+    const parcela = amortizacao + juros;
+    totalSac += parcela;
+
+    detalhesSac += `
+      <tr>
+        <td>${i}</td>
+        <td>R$ ${formatarValorMonetario(parcela)}</td>
+        <td>R$ ${formatarValorMonetario(juros)}</td>
+        <td>R$ ${formatarValorMonetario(amortizacao)}</td>
+        <td>R$ ${formatarValorMonetario(saldoDevedor)}</td>
+      </tr>
+    `;
+
+    saldoDevedor -= amortizacao;
   }
 
-  #resultado thead tr {
-    display: none; /* Esconde cabeçalho para mobile */
-  }
+  detalhesSac += `
+      </tbody>
+    </table>
+  `;
 
-  #resultado tbody tr {
-    margin-bottom: 18px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    padding: 18px 15px;
-  }
-
-  #resultado tbody td {
-    padding: 12px 14px;
-    text-align: right;
-    position: relative;
-    padding-left: 55%;
-    font-size: 0.9rem;
-    color: #2c3e50;
-    border: none;
-    border-bottom: 1px solid #eee;
-  }
-
-  #resultado tbody td:last-child {
-    border-bottom: none;
-  }
-
-  #resultado tbody td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: 700;
-    color: #2980b9;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    white-space: nowrap;
-  }
+  resultadoDiv.innerHTML = `
+    <h3>Resultado</h3>
+    <p><strong>Valor financiado:</strong> R$ ${formatarValorMonetario(valorFinanciado)}</p>
+    <p><strong>Sistema PRICE:</strong> Parcela fixa de R$ ${formatarValorMonetario(parcelaPrice)} – Total: R$ ${formatarValorMonetario(totalPrice)}</p>
+    <p><strong>Sistema SAC:</strong> Parcelas decrescentes – Total estimado: R$ ${formatarValorMonetario(totalSac)}</p>
+    <h4>Detalhamento das parcelas SAC:</h4>
+    ${detalhesSac}
+  `;
 }
