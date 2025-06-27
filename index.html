@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Simulador de Financiamento Habitacional</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>Simulador de Financiamento Habitacional</h1>
+  <div class="container">
+    <label for="valor">Valor do imóvel:</label>
+    <input type="text" id="valor" oninput="formatarInput(this)" placeholder="Ex: 300.000,00" />
+
+    <label for="entrada">Valor de entrada:</label>
+    <input type="text" id="entrada" oninput="formatarInput(this)" placeholder="Ex: 90.000,00" />
+
+    <label for="juros">Taxa de juros anual (%):</label>
+    <input type="number" id="juros" step="0.01" placeholder="Ex: 8.5" />
+
+    <label for="prazo">Prazo (meses):</label>
+    <input type="number" id="prazo" placeholder="Ex: 240" />
+
+    <button onclick="calcular()">Calcular</button>
+    <button class="limpar" onclick="limparCampos()">Limpar</button>
+
+    <div id="resultado"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

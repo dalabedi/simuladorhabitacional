@@ -1,0 +1,208 @@
+/* Reset e base */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f0ff 0%, #f7fbff 100%);
+  margin: 0;
+  padding: 20px;
+  color: #34495e;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 35px;
+  font-weight: 700;
+  font-size: 2.2rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 40px 35px;
+  border-radius: 15px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+label {
+  display: block;
+  margin-top: 22px;
+  font-weight: 600;
+  color: #34495e;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 16px 22px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1.5px solid #b0c4de;
+  box-sizing: border-box;
+  font-size: 1rem;
+  color: #2c3e50;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background: #fafafa;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #2980b9;
+  box-shadow: 0 0 8px rgba(41, 128, 185, 0.4);
+  background: #fff;
+}
+
+button {
+  margin-top: 28px;
+  background-color: #2980b9;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  padding: 16px 22px;
+  font-size: 1.1rem;
+  box-shadow: 0 6px 15px rgba(41, 128, 185, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: #1c5980;
+  box-shadow: 0 8px 18px rgba(28, 89, 128, 0.6);
+  transform: translateY(-2px);
+}
+
+button.limpar {
+  background-color: #e74c3c;
+  box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+}
+
+button.limpar:hover {
+  background-color: #b83228;
+  box-shadow: 0 8px 18px rgba(184, 50, 40, 0.6);
+}
+
+#resultado {
+  margin-top: 35px;
+  background: #f9fbff;
+  padding: 25px 30px;
+  border-radius: 12px;
+  border-left: 6px solid #2980b9;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #2c3e50;
+  box-shadow: inset 0 3px 7px rgba(0, 0, 0, 0.04);
+  min-height: 260px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Estilo da tabela dentro do resultado */
+
+#resultado table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+#resultado thead {
+  background-color: #2980b9;
+  color: white;
+}
+
+#resultado thead th {
+  padding: 16px 20px;
+  font-weight: 700;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.3);
+  font-size: 1rem;
+}
+
+#resultado thead th:last-child {
+  border-right: none;
+}
+
+#resultado tbody tr {
+  background-color: #fff;
+  transition: background-color 0.3s ease;
+  cursor: default;
+}
+
+#resultado tbody tr:nth-child(even) {
+  background-color: #ecf4ff;
+}
+
+#resultado tbody tr:hover {
+  background-color: #d6e7ff;
+}
+
+#resultado tbody td {
+  padding: 14px 20px;
+  text-align: center;
+  border-bottom: 1px solid #e1e8f5;
+  font-size: 0.95rem;
+  color: #34495e;
+}
+
+#resultado tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Responsividade para a tabela */
+
+@media (max-width: 600px) {
+  #resultado table,
+  #resultado thead,
+  #resultado tbody,
+  #resultado th,
+  #resultado td,
+  #resultado tr {
+    display: block;
+  }
+
+  #resultado thead tr {
+    display: none;
+  }
+
+  #resultado tbody tr {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    padding: 18px 15px;
+  }
+
+  #resultado tbody td {
+    padding: 12px 14px;
+    text-align: right;
+    position: relative;
+    padding-left: 55%;
+    font-size: 0.9rem;
+    color: #2c3e50;
+  }
+
+  #resultado tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 700;
+    color: #2980b9;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+  }
+}
