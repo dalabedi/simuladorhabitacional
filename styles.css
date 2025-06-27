@@ -161,9 +161,41 @@ button.limpar:hover {
   border-bottom: none;
 }
 
-/* Responsividade para a tabela */
-
+/* Responsividade para telas pequenas */
 @media (max-width: 600px) {
+  body {
+    padding: 15px 10px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 25px 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    border-radius: 12px;
+  }
+
+  label {
+    font-size: 1rem;
+    margin-top: 18px;
+  }
+
+  input, select, button {
+    font-size: 1rem;
+    padding: 14px 18px;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 14px 18px;
+  }
+
+  #resultado {
+    min-height: 220px;
+    padding: 20px 18px;
+    font-size: 0.95rem;
+  }
+
+  /* Tabela responsiva em formato card */
   #resultado table,
   #resultado thead,
   #resultado tbody,
@@ -174,14 +206,14 @@ button.limpar:hover {
   }
 
   #resultado thead tr {
-    display: none;
+    display: none; /* Esconde cabeçalho para mobile */
   }
 
   #resultado tbody tr {
-    margin-bottom: 20px;
-    background-color: #fff;
+    margin-bottom: 18px;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
     padding: 18px 15px;
   }
 
@@ -192,17 +224,24 @@ button.limpar:hover {
     padding-left: 55%;
     font-size: 0.9rem;
     color: #2c3e50;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  #resultado tbody td:last-child {
+    border-bottom: none;
   }
 
   #resultado tbody td::before {
     content: attr(data-label);
     position: absolute;
-    left: 18px;
+    left: 15px;
     top: 50%;
     transform: translateY(-50%);
     font-weight: 700;
     color: #2980b9;
     text-transform: uppercase;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 }
